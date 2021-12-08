@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
 
+// Remember to load the env-variables before running the test-script
 module.exports = {
   networks: {
     hardhat: {
