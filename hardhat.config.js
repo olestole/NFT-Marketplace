@@ -1,5 +1,9 @@
 require("@nomiclabs/hardhat-waffle");
 
+// Use dotenv to load the .env-variables into process.env
+require('dotenv').config({ path: '.env.local' })
+
+
 // Remember to load the env-variables before running the test-script
 module.exports = {
   networks: {
