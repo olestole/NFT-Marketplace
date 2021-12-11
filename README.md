@@ -13,3 +13,11 @@ npx hardhat node
 node scripts/sample-script.js
 npx hardhat help
 ```
+
+---
+
+Rememeber to:
+- Use metamask as a wallet
+- Run a local hardhat node
+- Deploy the contract to the local network
+  - `npx hardhat deploy --network local`

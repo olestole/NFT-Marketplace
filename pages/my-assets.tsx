@@ -1,80 +1,70 @@
-import type { NextPage } from "next";
-
+import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
+import { create as ipfsHttpClient } from "ipfs-http-client";
+import { useRouter } from "next/router";
+import Web3Modal from "web3modal";
 import { nftaddress, nftmarketaddress } from "../config";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
-import Web3Modal from "web3modal";
+import axios from "axios";
 import Image from "next/image";
 
-const Home: NextPage = () => {
+const client = ipfsHttpClient({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https",
+  apiPath: "/api/v0",
+});
+
+const MyAssets = () => {
   const [nfts, setNfts] = useState<any[]>([]);
   const [loadingState, setLoadingState] = useState("not-loaded");
 
   useEffect(() => {
-    loadNFTs();
+    loadNfts();
   }, []);
 
-  const loadNFTs = async () => {
-    const provider = new ethers.providers.JsonRpcProvider();
-    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
+  const loadNfts = async () => {
+    const web3Modal = new Web3Modal();
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
     const marketContract = new ethers.Contract(
       nftmarketaddress,
       Market.abi,
-      provider
+      signer
     );
-    const data = await marketContract.fetchMarketItems();
+    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
+    const data = await marketContract.fetchMyNFTs();
 
     const items = await Promise.all(
-      data.map(async (i: any) => {
-        const tokenUri = await tokenContract.tokenURI(i.tokenId);
+      data.map(async (nft: any) => {
+        const tokenUri = await tokenContract.tokenURI(nft.tokenId);
         const meta = await axios.get(tokenUri);
-        let price = ethers.utils.formatUnits(i.price.toString(), "ether");
-
-        // TODO: Type these items
+        let price = ethers.utils.formatUnits(nft.price.toString(), "ether");
         let item = {
           price,
-          tokenId: i.tokenId.toNumber(),
-          seller: i.seller,
-          owner: i.owner,
+          tokenId: nft.tokenId.toNumber(),
+          seller: nft.seller,
+          owner: nft.owner,
           image: meta.data.image,
           name: meta.data.name,
           description: meta.data.description,
         };
+
         return item;
       })
     );
+
     setNfts(items);
     setLoadingState("loaded");
-  };
-
-  const buyNft = async (nft: any) => {
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-
-    // Need the user to be able to sign and execute a transaction -> Create a signer
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
-
-    const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
-    const transaction = await contract.createMarketSale(
-      nftaddress,
-      nft.tokenId,
-      { value: price }
-    );
-
-    await transaction.wait();
-    loadNFTs();
   };
 
   if (loadingState === "loaded" && !nfts.length) {
     return (
       <div className="m-6">
-        <h1>No items in the marketplace</h1>
+        <h1>You own no assets</h1>
       </div>
     );
   }
@@ -101,12 +91,6 @@ const Home: NextPage = () => {
             </div>
             <div className="flex flex-row justify-between items-center mt-2">
               <p>{nft.price}</p>
-              <button
-                onClick={() => buyNft(nft)}
-                className="rounded-md px-2 py-1 bg-white text-gray-800"
-              >
-                Buy
-              </button>
             </div>
           </div>
         ))}
@@ -115,4 +99,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default MyAssets;
