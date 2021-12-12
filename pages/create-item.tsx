@@ -6,6 +6,8 @@ import Web3Modal from "web3modal";
 import { nftaddress, nftmarketaddress } from "../config";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
 
 const client = ipfsHttpClient({
   host: "ipfs.infura.io",
@@ -94,10 +96,10 @@ const CreateItem = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="w-1/2 flex flex-col pb-12">
+      <div className="w-1/2 flex flex-col pb-12 space-y-2">
         <input
           placeholder="Asset Name"
-          className="mt-8 border rounded p-4"
+          className="border rounded p-4"
           onChange={(e) =>
             updateFormInput({ ...formInput, name: e.target.value })
           }
@@ -105,30 +107,44 @@ const CreateItem = () => {
         <textarea
           name="Description"
           placeholder="Asset Description"
-          className="mt-2 border rounded p-4"
+          className="border rounded p-4"
           onChange={(e) =>
             updateFormInput({ ...formInput, description: e.target.value })
           }
         />
         <input
           placeholder="Asset Price in Matic"
-          className="mt-2 border rounded p-4"
+          className="border rounded p-4"
           onChange={(e) =>
             updateFormInput({ ...formInput, price: e.target.value })
           }
         />
-        <input
-          type="file"
-          name="Asset"
-          placeholder="Asset Price in Matic"
-          className="my-4"
-          onChange={onChange}
-        />
-        {fileUrl && (
-          <img className="rounded mt-4" src={fileUrl} alt="File preview" />
-        )}
+        <div className="flex items-center max-h-72">
+          <label
+            className="p-4 bg-white rounded hover:cursor-pointer w-64"
+            htmlFor="nft_file"
+          >
+            <FontAwesomeIcon icon={faCloudUploadAlt} size="lg" /> Upload the NFT
+            file
+            <input
+              className="hidden"
+              aria-describedby="nft_file_help"
+              id="nft_file"
+              type="file"
+              onChange={onChange}
+            />
+          </label>
+          {fileUrl && (
+            <img
+              className="rounded mt-4 mx-auto max-h-64"
+              src={fileUrl}
+              alt="File preview"
+            />
+          )}
+        </div>
+
         <button
-          className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
+          className="font-bold bg-accent text-white rounded p-4 shadow-stripe"
           onClick={createItem}
         >
           Create Digital Asset

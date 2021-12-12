@@ -79,37 +79,39 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="flex w-full h-full mx-auto">
-      <div className="flex flex-wrap gap-4">
-        {nfts.map((nft, i) => (
-          <div
-            key={i}
-            className="relative rounded-md w-72 bg-[#009DAE] text-white p-4"
+    <div className="flex">
+      {nfts.map((nft, i) => (
+        <div
+          key={i}
+          className="relative rounded-md w-72 bg-primary text-white p-4 shadow-stripe"
+        >
+          <Image
+            src={nft.image}
+            alt=""
+            width="100%"
+            height="100%"
+            layout="responsive"
+            objectFit="contain"
+          />
+          <div className="pt-4">
+            <h4 className="font-bold">{nft.name}</h4>
+            <p>{nft.description}</p>
+          </div>
+
+          <button
+            onClick={() => buyNft(nft)}
+            className="flex w-full rounded-md px-2 py-1 bg-secondary mt-2 items-center justify-center"
           >
             <Image
-              src={nft.image}
+              src="https://cryptologos.cc/logos/polygon-matic-logo.png"
               alt=""
-              width="100%"
-              height="100%"
-              layout="responsive"
-              objectFit="contain"
+              width={16}
+              height={16}
             />
-            <div className="pt-4">
-              <h4 className="font-bold">{nft.name}</h4>
-              <p>{nft.description}</p>
-            </div>
-            <div className="flex flex-row justify-between items-center mt-2">
-              <p>{nft.price}</p>
-              <button
-                onClick={() => buyNft(nft)}
-                className="rounded-md px-2 py-1 bg-white text-gray-800"
-              >
-                Buy
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+            <p className="ml-2 text-white">{nft.price}</p>
+          </button>
+        </div>
+      ))}
     </div>
   );
 };

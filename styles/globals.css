@@ -18,4 +18,13 @@
   h5 {
     @apply text-lg;
   }
+  body {
+    @apply text-gray-700;
+  }
+}
+
+@layer components {
+  .link {
+    @apply hover:text-gray-500 transition-all
+  }
 }

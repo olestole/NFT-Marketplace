@@ -16,7 +16,7 @@ interface Props {
 
 const PageLinks: React.FC<Props> = ({ open, current, setCurrent }) => {
   return (
-    <div>
+    <div className="flex flex-col">
       <PageLink
         href="/"
         open={open}

@@ -6,6 +6,7 @@ import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import axios from "axios";
 import Image from "next/image";
+import NoItems from "../components/NoItems";
 
 const CreatorDashboard = () => {
   const [nfts, setNfts] = useState<any[]>([]);
@@ -57,8 +58,8 @@ const CreatorDashboard = () => {
 
   if (loadingState === "loaded" && !nfts.length) {
     return (
-      <div className="m-6">
-        <h1>No assets to display</h1>
+      <div className="flex w-full h-full justify-center items-center">
+        <NoItems title="You own no NFTs" />
       </div>
     );
   }

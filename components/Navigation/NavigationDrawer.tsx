@@ -13,6 +13,7 @@ export enum navItems {
   "my-assets",
   "creator-dashboard",
 }
+import ElephantLogo from "../../assets/elephant.svg";
 
 const NavigationDrawer: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -27,8 +28,9 @@ const NavigationDrawer: React.FC = () => {
       initial={{ width: 78 }}
       animate={{ width: open ? 320 : 78 }}
       className="h-screen sticky right-0 top-0 rounded-l-3xl shadow-stripe z-10 bg-white ml-4"
+      layout
     >
-      <div className="px-4 relative justify-start items-start space-y-4 h-full">
+      <div className="px-4 relative justify-start items-start h-full">
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -38,33 +40,26 @@ const NavigationDrawer: React.FC = () => {
           <FontAwesomeIcon
             size="2x"
             icon={open ? faChevronCircleRight : faChevronCircleLeft}
-            className="bg-white rounded-full -p-2"
+            className="bg-white rounded-full -p-2 text-accent"
           />
         </motion.button>
-
-        <div className="flex justify-between">
+        <div className="space-y-4 py-4">
           <motion.div
-            animate={{ width: open ? 48 : 32, height: open ? 48 : 32 }}
-            initial={{ width: open ? 48 : 32, height: open ? 48 : 32 }}
-            className="flex justify-center items-center border-4 bg-yellow-400 rounded-lg border-gray-700"
+            className="mx-auto mt-4 h-8 w-8"
+            animate={{ height: open ? 96 : 50, width: open ? 96 : 50 }}
+            initial={{ height: open ? 96 : 50, width: open ? 96 : 50 }}
           >
-            <motion.p
-              animate={{ fontSize: open ? 20 : 8 }}
-              initial={{ fontSize: open ? 20 : 8 }}
-              className="font-bold text-gray-700"
-            >
-              OAS
-            </motion.p>
+            <ElephantLogo />
           </motion.div>
-        </div>
-        <div className="flex flex-col space-y-1 w-full">
-          <p
-            className="text-gray-400 text-sm"
-            style={{ fontSize: open ? 16 : 10 }}
-          >
-            CONTENT
-          </p>
-          <PageLinks open={open} setCurrent={setCurrent} current={current} />
+          <div className="flex flex-col space-y-1 w-full">
+            <p
+              className="text-gray-400 text-xs transition-all"
+              style={{ transform: open ? "scale(1)" : "scale(0)" }}
+            >
+              CONTENT
+            </p>
+            <PageLinks open={open} setCurrent={setCurrent} current={current} />
+          </div>
         </div>
       </div>
     </motion.div>

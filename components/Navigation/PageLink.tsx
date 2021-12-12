@@ -25,21 +25,24 @@ const PageLink: React.FC<PageProps> = ({
 }) => {
   return (
     <div
-      className="hover:bg-blue-400 hover:bg-opacity-20 p-2 rounded-md transition-all"
+      className="hover:bg-secondary hover:bg-opacity-20 p-2 rounded-md transition-all"
       onClick={() => setCurrent(navItem)}
     >
       <Link href={href} passHref>
         <a className="flex flex-nowrap items-center overflow-hidden">
-          <FontAwesomeIcon
-            icon={icon}
-            className="mr-2"
-            color={current === navItem ? "#0374ff" : "#374151"}
-          />
+          <div className="w-10">
+            <FontAwesomeIcon
+              icon={icon}
+              className="mr-2"
+              size="lg"
+              color={current === navItem ? "#009DAE" : "#374151"}
+            />
+          </div>
           <motion.p
-            className="whitespace-nowrap"
+            className="link whitespace-nowrap"
             initial={{ opacity: open ? 1 : 0 }}
             animate={{ opacity: open ? 1 : 0 }}
-            style={{ color: current === navItem ? "#0374ff" : "#374151" }}
+            style={{ color: current === navItem ? "#009DAE" : "#374151" }}
           >
             {name}
           </motion.p>
