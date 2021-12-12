@@ -1,14 +1,13 @@
 import type { NextPage } from "next";
-
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import { nftaddress, nftmarketaddress } from "../config";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import Web3Modal from "web3modal";
 import Image from "next/image";
+import NoItems from "../components/NoItems";
 
 const Home: NextPage = () => {
   const [nfts, setNfts] = useState<any[]>([]);
@@ -73,19 +72,19 @@ const Home: NextPage = () => {
 
   if (loadingState === "loaded" && !nfts.length) {
     return (
-      <div className="m-6">
-        <h1>No items in the marketplace</h1>
+      <div className="flex w-full h-full justify-center items-center">
+        <NoItems />
       </div>
     );
   }
 
   return (
-    <div className="flex w-full h-full m-6">
+    <div className="flex w-full h-full mx-auto">
       <div className="flex flex-wrap gap-4">
         {nfts.map((nft, i) => (
           <div
             key={i}
-            className="relative rounded-md w-72 bg-gray-800 text-white p-4"
+            className="relative rounded-md w-72 bg-[#009DAE] text-white p-4"
           >
             <Image
               src={nft.image}

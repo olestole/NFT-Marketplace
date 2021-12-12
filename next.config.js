@@ -4,4 +4,12 @@ module.exports = {
   images: {
     domains: ["ipfs.infura.io"],
   },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"]
+    });
+
+    return config;
+  }
 };
