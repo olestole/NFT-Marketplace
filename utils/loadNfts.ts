@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ethers } from "ethers";
-import { nftaddress, nftmarketaddress } from "../config";
+import { nftaddress, nftmarketaddress, RPClink } from "../config";
 import { NftItem } from "../types/types";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
@@ -27,7 +27,7 @@ const loadNFTs = async (
         ? provider.getSigner()
         : undefined;
   } else {
-    provider = new ethers.providers.JsonRpcProvider();
+    provider = new ethers.providers.JsonRpcProvider(RPClink);
   }
 
   const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);

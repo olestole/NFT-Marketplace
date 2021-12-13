@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import NoItems from "../components/NoItems";
+import Indicator from "../components/Indicator";
 import NftCard from "../components/NftCard";
 import loadNFTs, { nftStatus } from "../utils/loadNfts";
 
@@ -17,10 +17,13 @@ const MyAssets = () => {
     setLoadingState("loaded");
   };
 
-  if (loadingState === "loaded" && !nfts.length) {
+  if (!nfts.length) {
     return (
       <div className="flex w-full h-full justify-center items-center">
-        <NoItems title="You own no NFTs" />
+        <Indicator
+          title="You own no NFTs"
+          loading={loadingState !== "loaded"}
+        />
       </div>
     );
   }

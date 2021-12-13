@@ -1,6 +1,6 @@
 # NFT Marketplace
 
-A marketplace for NFTs.
+A marketplace for NFTs. The contracts are deployed to the Mumbai Testnet.
 
 ![Screenshot of dApp](/assets/ReadmeScreenshot.png?raw=true)
 
@@ -16,6 +16,16 @@ A marketplace for NFTs.
 ```bash
 $ npm i
 ```
+
+---
+
+**To run the project locally:**
+Create a `.env.local`-file and add the following keys:
+
+**NB: Don't use your primary MetaMask wallet when testing locally. Create a new test wallet**
+
+- PROJECT_ID=_< INFURA PROJECT ID >_
+- METAMASK_PRIVATE_KEY=_< METAMASK TEST-WALLET PRIVATE KEY >_
 
 ## Usage
 

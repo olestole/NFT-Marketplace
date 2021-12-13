@@ -5,7 +5,7 @@ import Backdrop from "../assets/Backdrop.svg";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="flex w-screen min-h-screen">
+    <div className="flex w-screen min-h-screen bg-secondary">
       <Backdrop className="absolute -z-50 h-screen w-screen" />
       <div className="z-50 w-full min-h-screen p-12">
         <Component {...pageProps} />

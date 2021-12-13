@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import NoItems from "../components/NoItems";
+import Indicator from "../components/Indicator";
 import NftCard from "../components/NftCard";
 import loadNFTs, { nftStatus } from "../utils/loadNfts";
 import { NftItem } from "../types/types";
+import Link from "next/link";
 
 const CreatorDashboard = () => {
   const [nfts, setNfts] = useState<any[]>([]);
@@ -21,10 +22,13 @@ const CreatorDashboard = () => {
     setLoadingState("loaded");
   };
 
-  if (loadingState === "loaded" && !nfts.length) {
+  if (!nfts.length) {
     return (
       <div className="flex w-full h-full justify-center items-center">
-        <NoItems title="You own no NFTs" />
+        <Indicator
+          title="You own no NFTs"
+          loading={loadingState !== "loaded"}
+        />
       </div>
     );
   }
@@ -33,16 +37,26 @@ const CreatorDashboard = () => {
     <div className="flex m-6">
       <div className="flex flex-col">
         <div className="flex flex-col mb-8">
-          <h3>Sold by you</h3>
+          <h4 className="font-light">Sold by you</h4>
           <div className="flex flex-wrap gap-4">
-            {Boolean(soldItems.length) &&
+            {Boolean(soldItems.length) ? (
               soldItems.map((nft, i) => (
                 <NftCard nft={nft} owned={false} key={i} />
-              ))}
+              ))
+            ) : (
+              <p className="font-bold">
+                You have not sold any NFTs yet -{" "}
+                <Link href="/create-item" passHref>
+                  <a className="link underline">
+                    Test your luck with a new NFT
+                  </a>
+                </Link>
+              </p>
+            )}
           </div>
         </div>
         <div className="flex flex-col">
-          <h3>Created by you</h3>
+          <h4 className="font-light">Created by you</h4>
           <div className="flex flex-wrap gap-4">
             {nfts.map((nft, i) => (
               <NftCard nft={nft} owned={false} key={i} />

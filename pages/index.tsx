@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useState, useEffect } from "react";
-import NoItems from "../components/NoItems";
+import Indicator from "../components/Indicator";
 import loadNFTs from "../utils/loadNfts";
 import buyNft from "../utils/buyNft";
 import NftCard from "../components/NftCard";
@@ -19,10 +19,10 @@ const Home: NextPage = () => {
     setLoadingState("loaded");
   };
 
-  if (loadingState === "loaded" && !nfts.length) {
+  if (!nfts.length) {
     return (
       <div className="flex w-full h-full justify-center items-center">
-        <NoItems />
+        <Indicator loading={loadingState !== "loaded"} />
       </div>
     );
   }

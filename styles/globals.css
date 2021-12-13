@@ -25,6 +25,6 @@
 
 @layer components {
   .link {
-    @apply hover:text-gray-500 transition-all
+    @apply hover:text-gray-500 transition-all;
   }
 }
