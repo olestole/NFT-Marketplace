@@ -1,6 +1,6 @@
 # NFT Marketplace
 
-A marketplace for NFTs. The contracts are deployed to the Mumbai Testnet. 
+A marketplace for NFTs. The contracts are deployed to the Mumbai Testnet.
 
 - [Test the dApp](https://nft-marketplace-qo2nfhxgh-oleastole.vercel.app/)
 - [Get test funds [MATIC]](https://faucet.polygon.technology/)
@@ -13,6 +13,8 @@ A marketplace for NFTs. The contracts are deployed to the Mumbai Testnet.
 
 - Run a browser with a MetaMask-wallet
   - You need a wallet to connect to a Web3 application (dApp)
+- Set up MetaMask to use the Mumbai test network
+  - Use [these details](https://docs.polygon.technology/docs/develop/network-details/network) to set it up
 
 ### Installation
 
@@ -27,12 +29,10 @@ Create a `.env.local`-file and add the following keys:
 
 **NB: Don't use your primary MetaMask wallet when testing locally. Create a new test wallet**
 
-- PROJECT_ID=_< INFURA PROJECT ID >_
-- METAMASK_PRIVATE_KEY=_< METAMASK TEST-WALLET PRIVATE KEY >_
+- PROJECT*ID=*< INFURA PROJECT ID >\_
+- METAMASK*PRIVATE_KEY=*< METAMASK TEST-WALLET PRIVATE KEY >\_
 
 ## Usage
-
-
 
 **Run the project locally with the following commands:**
 
