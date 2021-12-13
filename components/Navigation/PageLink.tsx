@@ -24,12 +24,12 @@ const PageLink: React.FC<PageProps> = ({
   navItem,
 }) => {
   return (
-    <div
-      className="hover:bg-secondary hover:bg-opacity-20 p-2 rounded-md transition-all"
-      onClick={() => setCurrent(navItem)}
-    >
+    <div className="hover:bg-secondary hover:bg-opacity-20 p-2 rounded-md transition-all">
       <Link href={href} passHref>
-        <a className="flex flex-nowrap items-center overflow-hidden">
+        <a
+          className="flex flex-nowrap items-center overflow-hidden"
+          onClick={() => setCurrent(navItem)}
+        >
           <div className="w-10">
             <FontAwesomeIcon
               icon={icon}
