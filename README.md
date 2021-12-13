@@ -1,6 +1,9 @@
 # NFT Marketplace
 
-A marketplace for NFTs. The contracts are deployed to the Mumbai Testnet.
+A marketplace for NFTs. The contracts are deployed to the Mumbai Testnet. 
+
+- [Test the dApp](https://nft-marketplace-qo2nfhxgh-oleastole.vercel.app/)
+- [Get test funds [MATIC]](https://faucet.polygon.technology/)
 
 ![Screenshot of dApp](/assets/ReadmeScreenshot.png?raw=true)
 
@@ -28,6 +31,8 @@ Create a `.env.local`-file and add the following keys:
 - METAMASK_PRIVATE_KEY=_< METAMASK TEST-WALLET PRIVATE KEY >_
 
 ## Usage
+
+
 
 **Run the project locally with the following commands:**
 
