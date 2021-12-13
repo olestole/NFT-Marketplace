@@ -1,23 +1,32 @@
-# Basic Sample Hardhat Project
+# NFT Marketplace
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+A marketplace for NFTs.
 
-Try running some of the following tasks:
+![Screenshot of dApp](/assets/ReadmeScreenshot.png?raw=true)
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
+## Getting Started
+
+### Prerequisites
+
+- Run a browser with a MetaMask-wallet
+  - You need a wallet to connect to a Web3 application (dApp)
+
+### Installation
+
+```bash
+$ npm i
 ```
 
----
+## Usage
 
-Rememeber to:
-- Use metamask as a wallet
-- Run a local hardhat node
-- Deploy the contract to the local network
-  - `npx hardhat deploy --network local`
+**Run the project locally with the following commands:**
+
+```bash
+$ npx hardhat node
+$ npx scripts/deploy.js --network localhost
+$ npm run dev
+```
+
+By running the node locally you'll be provided with multiple test-accounts with funds that can be used to test the dApp. Import the account to MetaMask and use the imported account to interact with the dApp.
+
+Assuming you have a MetaMask wallet in your browser, you should be able to interact with the dApp.
